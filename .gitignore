@@ -1,0 +1,17 @@
+# Node.js dependencies (critical ignore for JS projects)
+/node_modules
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Optional: IDE configuration files
+/.vscode/
+.idea/
+
+# Optional: Build output folders (if add build tools like Webpack later)
+/dist
+/build
+/out
