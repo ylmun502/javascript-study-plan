@@ -15,3 +15,27 @@ async function displayGreeting() {
 }
 
 displayGreeting();
+
+function selectElementAsync(id) {
+    return new Promise((resolve, reject) => {
+        const element = document.getElementById(id);
+        if (element === null) {
+            reject(`Element with ID "${id}" was not found`);
+        } else {
+            resolve(element);
+        }
+    });
+}
+
+async function handleDomError() {
+    try {
+        const element = await selectElementAsync("nonExistenId");
+        element.textContent = "Select Id found by using async";
+    } catch (error) {
+        console.error("Error handler caught:", error);
+    } finally {
+        console.log("All operations are done!");
+    }
+}
+
+handleDomError();
