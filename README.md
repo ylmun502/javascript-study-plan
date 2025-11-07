@@ -28,6 +28,9 @@ I have organized my learning into the following main sections, with a dedicated 
 # Advanced JavaScript
 *   **04 - Asynchronous JavaScript:** Understand callbacks, Promises, async/await for fetching data from an API. 
 
+# Projects
+*   **Simple Todo List Manager.
+
 ---
 
 # Repository Structure
