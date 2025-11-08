@@ -9,7 +9,7 @@ function renderTasks() {
         const newLiTag = document.createElement("li");
         const deleteButton = document.createElement("button");
         newLiTag.textContent = `${task.text}`;
-        if(task.completed) {
+        if (task.completed) {
             newLiTag.classList.add("completed-task");
         }
         newLiTag.addEventListener(("click"), () => {
@@ -26,11 +26,25 @@ function renderTasks() {
 
 function toggleComplete(index) {
     tasks[index].completed = !tasks[index].completed;
+    saveTasks();
     renderTasks();
 }
 
 function deleteTask(index) {
     tasks.splice(index, 1);
+    saveTasks();
+    renderTasks();
+}
+
+function saveTasks() {
+    localStorage.setItem("myTodoTasks", JSON.stringify(tasks));
+}
+
+function loadTask() {
+    const storedTask = localStorage.getItem("myTodoTasks");
+    if (storedTask) {
+        tasks = JSON.parse(storedTask);
+    }
     renderTasks();
 }
 
@@ -39,9 +53,12 @@ addTaskButton.addEventListener("click", () => {
     if (taskText === "") {
         alert("Please input a task");
     } else {
-        tasks.push({text: taskText, completed: false});
+        tasks.push({ text: taskText, completed: false });
+        saveTasks();
     }
     renderTasks();
     inputField.value = "";
     inputField.focus();
-})
+});
+
+loadTask();
