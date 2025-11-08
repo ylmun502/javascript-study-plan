@@ -1,4 +1,4 @@
-const tasks = [];
+let tasks = [];
 const inputField = document.getElementById("new-task-input");
 const addTaskButton = document.getElementById("add-task-button");
 const todoList = document.getElementById("todo-list");
@@ -8,7 +8,13 @@ function renderTasks() {
     tasks.forEach((task, index) => {
         const newLiTag = document.createElement("li");
         const deleteButton = document.createElement("button");
-        newLiTag.textContent = `${task}`;
+        newLiTag.textContent = `${task.text}`;
+        if(task.completed) {
+            newLiTag.classList.add("completed-task");
+        }
+        newLiTag.addEventListener(("click"), () => {
+            toggleComplete(index);
+        })
         deleteButton.textContent = "Delete";
         deleteButton.addEventListener("click", () => {
             deleteTask(index);
@@ -18,17 +24,22 @@ function renderTasks() {
     });
 }
 
+function toggleComplete(index) {
+    tasks[index].completed = !tasks[index].completed;
+    renderTasks();
+}
+
 function deleteTask(index) {
     tasks.splice(index, 1);
     renderTasks();
 }
 
 addTaskButton.addEventListener("click", () => {
-    let task = inputField.value;
-    if (task === "") {
+    let taskText = inputField.value;
+    if (taskText === "") {
         alert("Please input a task");
     } else {
-        tasks.push(task);
+        tasks.push({text: taskText, completed: false});
     }
     renderTasks();
     inputField.value = "";
